@@ -58,6 +58,6 @@ public class TestDump {
         aList.remove(new Node(2,5));
         for(Node node : aList)
             System.out.print(node + " ");
-        System.out.println();
+        System.out.println((char) 97);
     }
 }
