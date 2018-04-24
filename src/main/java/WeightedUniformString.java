@@ -1,29 +1,48 @@
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Created by arnab.ray on 27/02/18.
  */
 public class WeightedUniformString {
 
-    private static String isPresent(String s, int[] countChar, int x) {
-        return null;
+    /*
+     * Complete the weightedUniformStrings function below.
+     */
+    static String[] weightedUniformStrings(String s, int[] queries) {
+        /*
+         * Write your code here.
+         */
+        String[] result = new String[queries.length];
+        Set<Integer> uniformWeight = new HashSet<Integer>();
+        int prevWeight = s.charAt(0) - 'a' + 1, currentWeight;
+        uniformWeight.add(prevWeight);
+        for(int i = 1; i < s.length(); i++) {
+            currentWeight = (s.charAt(i) == s.charAt(i-1)) ?  prevWeight + (s.charAt(i) - 'a' + 1) : s.charAt(i) - 'a' + 1;
+            uniformWeight.add(currentWeight);
+            prevWeight = currentWeight;
+        }
+
+        for(int i = 0; i < queries.length; i++) {
+            result[i] = uniformWeight.contains(queries[i]) ? "Yes" : "No";
+        }
+        return result;
     }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         String s = in.next();
-        int[] countChar = new int[256];
-        for(int i = 0; i < s.length(); i++)
-            countChar[s.charAt(i)]++;
 
-        for(int i = 0; i < 256; i++)
-            System.out.print(countChar[i] + " ");
-        System.out.println();
-        int n = in.nextInt();
-        for(int a0 = 0; a0 < n; a0++){
-            int x = in.nextInt();
-            // your code goes here
-            String result = isPresent(s, countChar, x);
-        }
+        int queriesCount = in.nextInt();
+        int[] queries = new int[queriesCount];
+
+        for(int i = 0; i < queriesCount; i++)
+            queries[i] = in.nextInt();
+
+        String[] result = weightedUniformStrings(s, queries);
+
+        for(int i = 0; i < queriesCount; i++)
+            System.out.println(result[i]);
     }
 }
