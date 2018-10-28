@@ -22,7 +22,7 @@ public class TwoStrings {
         for(int i = 0; i < stringLength; i++)
             set.add(s.charAt(i));
 
-        Character[] charSet = (Character[]) set.toArray(new Character[0]);
+        Character[] charSet = set.toArray(new Character[0]);
 
         for(int i = 0; i < charSet.length; i++) {
             for(int j = i+1; j < charSet.length; j++) {
